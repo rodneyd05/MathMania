@@ -1,5 +1,6 @@
 package com.thisisit.mathmania
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,10 +18,15 @@ class AdditionActivity : AppCompatActivity() {
     private var userScore = 0
     private var userLife = 3
 
-    //CountDownTimer class is an abstract class pre defined in kotlin
+    private var value1 = 0
+    private var value2 = 0
+    private var value3 = 0
+    private var value4 = 0
+
+    //CountDownTimer class is an abstract class predefined in kotlin
     //creating an object in abstract classes is not allowed, we will encounter error once initialized
     private lateinit var timer: CountDownTimer
-    private val startTimerInMillis: Long = 60_000
+    private val startTimerInMillis: Long = 20_000
     var timeLeftInMillis: Long = startTimerInMillis
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,67 +34,137 @@ class AdditionActivity : AppCompatActivity() {
         additionBinding = ActivityAdditionBinding.inflate(layoutInflater)
         setContentView(additionBinding.root)
 
-//        //Change the title in the action bar
-//        supportActionBar!!.title = "Addition"
-
         gameContinue()
 
-        additionBinding.buttonOk.setOnClickListener {
+        additionBinding.choiceA.setOnClickListener {
+            pauseTimer()
+            if (value1 == correctAnswer) {
 
-            val input = additionBinding.editTextAnswer.text.toString()
+                userScore += 10
+                Toast.makeText(applicationContext, "Correct!", Toast.LENGTH_SHORT).show()
+                additionBinding.textViewScore.text = userScore.toString()
 
-            if (input == "") {
-                Toast.makeText(applicationContext, "Please write an answer or click the next button", Toast.LENGTH_SHORT).show()
+                resetTimer()
+                gameContinue()
+
             } else {
+                userLife--
+                additionBinding.textViewLife.text = userLife.toString()
+                Toast.makeText(applicationContext, "Wrong", Toast.LENGTH_SHORT).show()
 
-                pauseTimer()
+                resetTimer()
 
-                val userAnswer = input.toInt()
-
-                if (userAnswer == correctAnswer) {
-                    userScore += 10
-                    additionBinding.textViewQuestion.text = "Congratulations, your answer is correct"
-                    additionBinding.textViewScore.text = userScore.toString()
-
+                if (userLife <= 0) {
+                    gameOver()
                 } else {
-                    userLife--
-                    additionBinding.textViewQuestion.text = "Sorry, your answer is wrong"
-                    additionBinding.textViewLife.text = userLife.toString()
-
+                    gameContinue()
                 }
             }
-
         }
 
-        additionBinding.buttonNext.setOnClickListener {
+        additionBinding.choiceB.setOnClickListener {
 
             pauseTimer()
-            resetTimer()
 
-            gameContinue()
-            additionBinding.editTextAnswer.setText("")
+            if (value2 == correctAnswer) {
+                userScore += 10
+                Toast.makeText(applicationContext, "Correct!", Toast.LENGTH_SHORT).show()
+                additionBinding.textViewScore.text = userScore.toString()
 
-            if (userLife <= 0) {
-
-                Toast.makeText(applicationContext,"Game Over",Toast.LENGTH_LONG).show()
-                val intent = Intent(this,ResultActivity::class.java)
-                intent.putExtra("score",userScore)
-                startActivity(intent)
-                finish()
-            } else {
+                resetTimer()
                 gameContinue()
-            }
+            } else {
+                userLife--
+                additionBinding.textViewLife.text = userLife.toString()
+                Toast.makeText(applicationContext, "Wrong", Toast.LENGTH_SHORT).show()
 
+                resetTimer()
+
+                if (userLife <= 0) {
+                    gameOver()
+                } else {
+                    gameContinue()
+                }
+            }
+        }
+
+        additionBinding.choiceC.setOnClickListener {
+
+            pauseTimer()
+
+            if (value3 == correctAnswer) {
+                userScore += 10
+                Toast.makeText(applicationContext, "Correct!", Toast.LENGTH_SHORT).show()
+                additionBinding.textViewScore.text = userScore.toString()
+
+                resetTimer()
+                gameContinue()
+            } else {
+                userLife--
+                additionBinding.textViewLife.text = userLife.toString()
+                Toast.makeText(applicationContext, "Wrong", Toast.LENGTH_SHORT).show()
+
+                resetTimer()
+
+                if (userLife <= 0) {
+                    gameOver()
+                } else {
+                    gameContinue()
+                }
+            }
+        }
+
+        additionBinding.choiceD.setOnClickListener {
+
+            pauseTimer()
+
+            if (value4 == correctAnswer) {
+                userScore += 10
+                Toast.makeText(applicationContext, "Correct!", Toast.LENGTH_SHORT).show()
+                additionBinding.textViewScore.text = userScore.toString()
+
+                resetTimer()
+                gameContinue()
+            } else {
+                userLife--
+                additionBinding.textViewLife.text = userLife.toString()
+                Toast.makeText(applicationContext, "Wrong", Toast.LENGTH_SHORT).show()
+
+                resetTimer()
+
+                if (userLife <= 0) {
+                    gameOver()
+                } else {
+                    gameContinue()
+                }
+            }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun gameContinue() {
         val number1 = Random.nextInt(0, 100)
         val number2 = Random.nextInt(0, 100)
 
-        additionBinding.textViewQuestion.text = "$number1 + $number2"
-
         correctAnswer = number1 + number2
+        val firstOption = Random.nextInt(0, 200)
+        val secondOption = Random.nextInt(0, 200)
+        val thirdOption = Random.nextInt(0, 200)
+
+        val valueList = listOf(correctAnswer, firstOption, secondOption, thirdOption)
+        val randomValue = valueList.shuffled()
+
+        value1 = randomValue[0]
+        value2 = randomValue[1]
+        value3 = randomValue[2]
+        value4 = randomValue[3]
+
+
+        additionBinding.textViewQuestion.text = "$number1 + $number2"
+        additionBinding.choiceA.text = value1.toString()
+        additionBinding.choiceB.text = value2.toString()
+        additionBinding.choiceC.text = value3.toString()
+        additionBinding.choiceD.text = value4.toString()
 
         startTimer()
     }
@@ -113,9 +189,15 @@ class AdditionActivity : AppCompatActivity() {
 
                 userLife--
                 additionBinding.textViewLife.text = userLife.toString()
-                additionBinding.textViewQuestion.text = "Sorry, Time is up!"
-            }
+                //additionBinding.textViewQuestion.text = "Time is up!"
+                Toast.makeText(applicationContext, "Time is up!", Toast.LENGTH_LONG).show()
 
+                if (userLife <= 0) {
+                    gameOver()
+                } else {
+                    gameContinue()
+                }
+            }
         }.start()
     }
 
@@ -131,5 +213,13 @@ class AdditionActivity : AppCompatActivity() {
     fun resetTimer() {
         timeLeftInMillis = startTimerInMillis
         updateText()
+    }
+
+    fun gameOver() {
+        Toast.makeText(applicationContext,"Game Over",Toast.LENGTH_LONG).show()
+        val intent = Intent(this,ResultActivity::class.java)
+        intent.putExtra("score",userScore)
+        startActivity(intent)
+        finish()
     }
 }

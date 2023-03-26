@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background2"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".AdditionActivity">
-<!--    android:fitsSystemWindows="true" to prevent top views to extend to statusBar-->
+    <!--    android:fitsSystemWindows="true" to prevent top views to extend to statusBar-->
 
     <LinearLayout
+        android:id="@+id/stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp">
 
         <TextView
             android:id="@+id/textView"
@@ -76,48 +77,73 @@
         android:id="@+id/textViewQuestion"
         android:layout_width="300dp"
         android:layout_height="75dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="150dp"
         android:background="@color/ice_blue"
         android:gravity="center"
         android:text="TextView"
         android:textColor="#455A64"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/editTextAnswer"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Write your answer here"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20sp" />
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stats" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/choice1"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewQuestion">
 
         <Button
-            android:id="@+id/buttonOk"
+            android:id="@+id/choiceA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="OK"
+            android:text="A"
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/buttonNext"
+            android:id="@+id/choiceB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="NEXT"
+            android:text="B"
             android:textSize="20sp" />
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/choice2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choice1">
+
+        <Button
+            android:id="@+id/choiceC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="C"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/choiceD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="D"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
