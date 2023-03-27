@@ -10,7 +10,7 @@ import com.thisisit.mathmania.databinding.ActivityAdditionBinding
 import java.util.*
 import kotlin.random.Random
 
-class AdditionActivity : AppCompatActivity() {
+class MultiplicationActivity : AppCompatActivity() {
 
     private lateinit var additionBinding: ActivityAdditionBinding
 
@@ -143,10 +143,10 @@ class AdditionActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun gameContinue() {
-        val number1 = Random.nextInt(0, 100)
-        val number2 = Random.nextInt(0, 100)
+        val number1 = Random.nextInt(11, 20)
+        val number2 = Random.nextInt(0, 10)
 
-        correctAnswer = number1 + number2
+        correctAnswer = number1 * number2
         val firstOption = Random.nextInt(0, 200)
         val secondOption = Random.nextInt(0, 200)
         val thirdOption = Random.nextInt(0, 200)
@@ -160,7 +160,7 @@ class AdditionActivity : AppCompatActivity() {
         value4 = randomValue[3]
 
 
-        additionBinding.textViewQuestion.text = "$number1 + $number2"
+        additionBinding.textViewQuestion.text = "$number1 x $number2"
         additionBinding.choiceA.text = value1.toString()
         additionBinding.choiceB.text = value2.toString()
         additionBinding.choiceC.text = value3.toString()

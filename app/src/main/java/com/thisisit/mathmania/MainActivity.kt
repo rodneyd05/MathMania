@@ -18,9 +18,19 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this,AdditionActivity::class.java)
             startActivity(intent)
-
         }
 
+        mainBinding.buttonSub.setOnClickListener {
+
+            val intent = Intent(this,SubtractionActivity::class.java)
+            startActivity(intent)
+        }
+
+        mainBinding.buttonMulti.setOnClickListener {
+
+            val intent = Intent(this,MultiplicationActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

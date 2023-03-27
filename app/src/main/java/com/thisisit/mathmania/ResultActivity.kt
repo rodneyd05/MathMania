@@ -1,5 +1,6 @@
 package com.thisisit.mathmania
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ class ResultActivity : AppCompatActivity() {
 
     private lateinit var resultBinding: ActivityResultBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         resultBinding = ActivityResultBinding.inflate(layoutInflater)
@@ -19,6 +21,15 @@ class ResultActivity : AppCompatActivity() {
         resultBinding.textViewResult.text = "Your score: $score"
 
         resultBinding.buttonAgain.setOnClickListener {
+
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+
+            //when we pass using intent from one activity to another activity we should close the older activity
+            finish()
+        }
+
+        resultBinding.buttonMainMenu.setOnClickListener {
 
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)

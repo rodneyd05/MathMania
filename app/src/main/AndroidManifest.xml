@@ -12,12 +12,18 @@
         android:theme="@style/Theme.MathMania"
         tools:targetApi="31">
         <activity
+            android:name=".MultiplicationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SubtractionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
             android:name=".AdditionActivity"
-            android:theme="@style/Theme.GameActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.GameActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
